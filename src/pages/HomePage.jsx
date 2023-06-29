@@ -1,7 +1,22 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { DatePicker, Input, Select, InputNumber } from "antd";
+import { useState } from "react";
+import * as employeesAction from "../features/employees/employeesSlice";
 
 export default function HomePage() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("unknown");
+  const [startDate, setStartDate] = useState("unknown");
+  const [street, setStreet] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zipCode, setZipCode] = useState("unknown");
+  const [department, setDepartement] = useState("");
+  const dispatch = useDispatch();
+
   return (
     <React.Fragment>
       <div className="title">
@@ -12,43 +27,93 @@ export default function HomePage() {
         <h2>Create Employee</h2>
         <form action="#" id="create-employee">
           <label htmlFor="first-name">First Name</label>
-          <input type="text" id="first-name" />
+          <Input
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
 
           <label htmlFor="last-name">Last Name</label>
-          <input type="text" id="last-name" />
+          <Input
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
 
           <label htmlFor="date-of-birth">Date of Birth</label>
-          <input id="date-of-birth" type="text" />
+          <DatePicker
+            style={{ width: 240 }}
+            onChange={(e) => setDateOfBirth(e === null ? "" : e.$d)}
+          />
 
           <label htmlFor="start-date">Start Date</label>
-          <input id="start-date" type="text" />
+          <DatePicker
+            style={{ width: 240 }}
+            onChange={(e) => setStartDate(e === null ? "" : e.$d)}
+          />
 
           <fieldset className="address">
             <legend>Address</legend>
 
             <label htmlFor="street">Street</label>
-            <input id="street" type="text" />
+            <Input value={street} onChange={(e) => setStreet(e.target.value)} />
 
             <label htmlFor="city">City</label>
-            <input id="city" type="text" />
+            <Input value={city} onChange={(e) => setCity(e.target.value)} />
 
             <label htmlFor="state">State</label>
-            <select name="state" id="state"></select>
+            <Select
+              style={{ width: 210 }}
+              defaultValue={state}
+              options={[
+                { value: "jack", label: "Jack" },
+                { value: "lucy", label: "Lucy" },
+                { value: "Yiminghe", label: "yiminghe" },
+              ]}
+              onChange={(e) => setState(e)}
+            />
 
             <label htmlFor="zip-code">Zip Code</label>
-            <input id="zip-code" type="number" />
+            <InputNumber
+              style={{ width: 210 }}
+              min={0}
+              max={99999}
+              onChange={(e) => setZipCode(e)}
+            />
           </fieldset>
 
           <label htmlFor="department">Department</label>
-          <select name="department" id="department">
-            <option>Sales</option>
-            <option>Marketing</option>
-            <option>Engineering</option>
-            <option>Human Resources</option>
-            <option>Legal</option>
-          </select>
+          <Select
+            style={{ width: 240 }}
+            defaultValue={department}
+            options={[
+              { value: "Sales" },
+              { value: "Marketing" },
+              { value: "Engineering" },
+              { value: "Human Resources" },
+              { value: "Legal" },
+            ]}
+            onChange={(e) => setDepartement(e)}
+          />
         </form>
-        <button>Save</button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            dispatch(
+              employeesAction.add({
+                firstName: firstName,
+                lastName: lastName,
+                dateOfBirth: dateOfBirth,
+                startDate: startDate,
+                street: street,
+                city: city,
+                state: state,
+                zipCode: zipCode,
+                department: department,
+              })
+            );
+          }}
+        >
+          Save
+        </button>
       </div>
     </React.Fragment>
   );

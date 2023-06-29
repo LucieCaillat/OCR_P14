@@ -1,9 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { DatePicker, Input, Select, InputNumber } from "antd";
+import { DatePicker, Input, Select, InputNumber, Button } from "antd";
 import { useState } from "react";
 import * as employeesAction from "../features/employees/employeesSlice";
+import { selectStates, states } from "../utils/states";
 
 export default function HomePage() {
   const [firstName, setFirstName] = useState("");
@@ -63,11 +64,7 @@ export default function HomePage() {
             <Select
               style={{ width: 210 }}
               defaultValue={state}
-              options={[
-                { value: "jack", label: "Jack" },
-                { value: "lucy", label: "Lucy" },
-                { value: "Yiminghe", label: "yiminghe" },
-              ]}
+              options={selectStates(states)}
               onChange={(e) => setState(e)}
             />
 
@@ -94,7 +91,7 @@ export default function HomePage() {
             onChange={(e) => setDepartement(e)}
           />
         </form>
-        <button
+        <Button
           onClick={(e) => {
             e.preventDefault();
             dispatch(
@@ -113,7 +110,7 @@ export default function HomePage() {
           }}
         >
           Save
-        </button>
+        </Button>
       </div>
     </React.Fragment>
   );

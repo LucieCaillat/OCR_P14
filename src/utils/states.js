@@ -1,6 +1,6 @@
 export function selectStates(states) {
   return states.map((state) => {
-    return { value: state.name };
+    return { value: state.abbreviation, label: state.name };
   });
 }
 

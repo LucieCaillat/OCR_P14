@@ -9,12 +9,12 @@ import { selectStates, states } from "../utils/states";
 export default function HomePage() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("unknown");
-  const [startDate, setStartDate] = useState("unknown");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [startDate, setStartDate] = useState("");
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [zipCode, setZipCode] = useState("unknown");
+  const [zipCode, setZipCode] = useState("");
   const [department, setDepartement] = useState("");
   const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ export default function HomePage() {
         <h1>HRnet</h1>
       </div>
       <div className="container">
-        <Link to="employee-list.html">View Current Employees</Link>
+        <Link to="/employee-list">View Current Employees</Link>
         <h2>Create Employee</h2>
         <form action="#" id="create-employee">
           <label htmlFor="first-name">First Name</label>
@@ -42,13 +42,18 @@ export default function HomePage() {
           <label htmlFor="date-of-birth">Date of Birth</label>
           <DatePicker
             style={{ width: 240 }}
+            format={"DD-MM-YYYY"}
             onChange={(e) => setDateOfBirth(e === null ? "" : e.$d)}
           />
 
           <label htmlFor="start-date">Start Date</label>
           <DatePicker
             style={{ width: 240 }}
-            onChange={(e) => setStartDate(e === null ? "" : e.$d)}
+            format={"DD-MM-YYYY"}
+            onChange={(e) => {
+              console.log(e);
+              setStartDate(e === null ? "" : e.$d);
+            }}
           />
 
           <fieldset className="address">

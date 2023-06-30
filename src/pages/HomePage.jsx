@@ -5,6 +5,7 @@ import { DatePicker, Input, Select, InputNumber, Button } from "antd";
 import { useState } from "react";
 import * as employeesAction from "../features/employees/employeesSlice";
 import { selectStates, states } from "../utils/states";
+import { addLeadingZeros } from "../utils/utils";
 
 export default function HomePage() {
   const [firstName, setFirstName] = useState("");
@@ -42,17 +43,20 @@ export default function HomePage() {
           <label htmlFor="date-of-birth">Date of Birth</label>
           <DatePicker
             style={{ width: 240 }}
-            format={"DD-MM-YYYY"}
-            onChange={(e) => setDateOfBirth(e === null ? "" : e.$d)}
+            format={"MM-DD-YYYY"}
+            onChange={(e) => {
+              setDateOfBirth(
+                e === null ? "" : e.$d.toLocaleDateString("en-US")
+              );
+            }}
           />
 
           <label htmlFor="start-date">Start Date</label>
           <DatePicker
             style={{ width: 240 }}
-            format={"DD-MM-YYYY"}
+            format={"MM-DD-YYYY"}
             onChange={(e) => {
-              console.log(e);
-              setStartDate(e === null ? "" : e.$d);
+              setStartDate(e === null ? "" : e.$d.toLocaleDateString("en-US"));
             }}
           />
 
@@ -77,7 +81,6 @@ export default function HomePage() {
             <InputNumber
               style={{ width: 210 }}
               min={0}
-              max={99999}
               onChange={(e) => setZipCode(e)}
             />
           </fieldset>
@@ -108,7 +111,7 @@ export default function HomePage() {
                 street: street,
                 city: city,
                 state: state,
-                zipCode: zipCode,
+                zipCode: zipCode === "" ? "" : addLeadingZeros(zipCode, 5),
                 department: department,
               })
             );

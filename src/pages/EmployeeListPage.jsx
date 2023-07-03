@@ -9,7 +9,7 @@ export default function EmployeeListePage() {
   return (
     <div className="container">
       <h1>Current Employees</h1>
-      <Table dataSource={dataSource} columns={columns} />
+      <Table dataSource={dataSource} columns={columns} rowKey={"id"} />
       <Link to="/">Home</Link>
     </div>
   );

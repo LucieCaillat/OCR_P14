@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { DatePicker, Input, Select, InputNumber, Button } from "antd";
 import { useState } from "react";
@@ -8,6 +8,7 @@ import { selectStates, states } from "../utils/states";
 import { addLeadingZeros } from "../utils/utils";
 
 export default function HomePage() {
+  const id = useSelector((state) => state.employees).length;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
@@ -104,6 +105,7 @@ export default function HomePage() {
             e.preventDefault();
             dispatch(
               employeesAction.add({
+                id: id,
                 firstName: firstName,
                 lastName: lastName,
                 dateOfBirth: dateOfBirth,

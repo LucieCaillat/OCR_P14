@@ -6,6 +6,7 @@ import { useState } from "react";
 import * as employeesAction from "../features/employees/employeesSlice";
 import { selectStates, states } from "../utils/states";
 import { addLeadingZeros } from "../utils/utils";
+import Modal from "../modal/Modal";
 
 export default function HomePage() {
   const id = useSelector((state) => state.employees).length;
@@ -18,6 +19,7 @@ export default function HomePage() {
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [department, setDepartement] = useState("");
+  const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
 
   return (
@@ -102,6 +104,7 @@ export default function HomePage() {
         </form>
         <Button
           onClick={(e) => {
+            setOpenModal(true);
             e.preventDefault();
             dispatch(
               employeesAction.add({
@@ -121,6 +124,9 @@ export default function HomePage() {
         >
           Save
         </Button>
+        <Modal open={openModal} onClose={() => setOpenModal(false)}>
+          Employee Created!
+        </Modal>
       </div>
     </React.Fragment>
   );

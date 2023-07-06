@@ -24,15 +24,18 @@ export default function EmployeeListePage() {
   return (
     <div className="container">
       <h1>Current Employees</h1>
-
-      <Search
-        placeholder="Search"
-        onChange={search}
-        style={{
-          width: 200,
-        }}
-      />
-      <Table dataSource={data} columns={columns} rowKey={"id"} />
+      <div>
+        <div className="search-div">
+          <Search
+            placeholder="Search"
+            onChange={search}
+            style={{
+              width: 200,
+            }}
+          />
+        </div>
+        <Table dataSource={data} columns={columns} rowKey={"id"} />
+      </div>
       <Link to="/">Home</Link>
     </div>
   );

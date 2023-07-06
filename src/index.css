@@ -24,3 +24,9 @@ label {
 form {
   margin-bottom: 20px;
 }
+.search-div {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  margin-bottom: 10px;
+}

@@ -6,7 +6,7 @@ import { useState } from "react";
 import * as employeesAction from "../features/employees/employeesSlice";
 import { selectStates, states } from "../utils/states";
 import { addLeadingZeros } from "../utils/utils";
-import Modal from "../modal/Modal";
+import { Modal } from "ocr_14_library";
 
 export default function HomePage() {
   const id = useSelector((state) => state.employees).length;
@@ -124,7 +124,11 @@ export default function HomePage() {
         >
           Save
         </Button>
-        <Modal open={openModal} onClose={() => setOpenModal(false)}>
+        <Modal
+          open={openModal}
+          onClose={() => setOpenModal(false)}
+          HtmlElement={document.getElementById("portal")}
+        >
           Employee Created!
         </Modal>
       </div>

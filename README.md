@@ -35,7 +35,7 @@ Here are the antd components used in the project :
 - Button
 - Table
 
-Here are the [ocr_14_library]:https://www.npmjs.com/package/ocr_14_library?activeTab=readme components used in the project :
+Here are the [ocr_14_library](https://www.npmjs.com/package/ocr_14_library?activeTab=readme) components used in the project :
 
 - Modal
 
